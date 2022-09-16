@@ -3,12 +3,12 @@ version: "3.5"
 services:
   lumen:
     ports:
-      - "8000:8000"
+      - "8080:8080"
     volumes:
-      - .:/var/www/localhost
-      - /var/www/localhost/trial/vendor/
+      - .:/var/www/html
+      - /var/www/html/vendor/
     build: .
-    command: php -S localhost:8000 -t public
+    # command: php -S localhost:8000 -t public
     restart: always
     depends_on:
       - db
