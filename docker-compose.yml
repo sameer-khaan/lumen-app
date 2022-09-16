@@ -1,0 +1,27 @@
+version: "3.5"
+
+services:
+  lumen:
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/var/www/localhost
+      - /var/www/localhost/trial/vendor/
+    build: .
+    command: php -S localhost:8000 -t public
+    restart: always
+    depends_on:
+      - db
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: trial_db
+      MYSQL_USER: root
+      MYSQL_PASSWORD: 1234
+      MYSQL_ROOT_PASSWORD: 1234
+    command: mysqld --default-authentication-plugin=mysql_native_password
+    volumes:
+      - ./database/mysql-data:/var/lib/mysql:rw
+volumes:
+  mysql-data:
